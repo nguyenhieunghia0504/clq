@@ -115,8 +115,22 @@ export default  function DetailsLand({route}){
        
     }
     const handleAddSchedule = async()=>{
-        const data = {"Time":date,"idLand":ID_LAND}
-        console.log(data)
+        const user = await AsyncStorage.getItem("USERNAME")
+        console.log(user)
+        if(user== null){
+            ToastAndroid.show("Vui lòng đăng nhập để đặt lịch !", ToastAndroid.SHORT);
+        }else{
+            const arrUser = JSON.parse(user)
+            const data = {"Time":date,"idLand":ID_LAND,"idCustommer":arrUser.idUser,"Email":arrUser.Email}
+            const res = await FetchAPI.postDataAPI("land/addSchedule",data)
+            console.log(res)
+            if(res.msg){
+                if(res.msg=="Success"){
+                    ToastAndroid.show("Đặt lịch thành công !", ToastAndroid.SHORT);
+                    setvisibleModal(false)
+                }
+            }
+        }
     }
     const ModalAsk = ()=>(
         <Modal

@@ -1,11 +1,12 @@
 
-import React,{useState,useEffect,useRef} from "react";
-import {View, Text,TextInput,Button,StyleSheet,Alert,ImageBackground,StatusBar,TouchableOpacity} from "react-native";
+import React,{useState,useRef} from "react";
+import {View, Text,TextInput,Button,StyleSheet,ImageBackground,StatusBar,TouchableOpacity} from "react-native";
 import { Formik } from 'formik';
 import * as yup from 'yup'
 import bglogin from '../assets/bg-login.jpg'
 import Entypo from 'react-native-vector-icons/Entypo';
 import * as GETAPI from '../utils/fetchApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const loginValidationSchema = yup.object().shape({
 username: yup
     .string()
@@ -29,10 +30,10 @@ export default function Login ({navigation,route}){
                 setErrors({username:"Tài khoản không tồn tại"})
             }else if(res.msg==="Incorrect password"){
                 setErrors({password:"Mật khẩu sai !!!"})
-            }else{
-                navigation.navigate("Tab")
-                await AsyncStorage.setItem("USERNAME",JSON.stringify(values))
             }
+        }else{
+            navigation.navigate("Tab")
+            AsyncStorage.setItem("USERNAME",JSON.stringify(res[0]))
         }
        
     }
