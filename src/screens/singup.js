@@ -17,28 +17,12 @@ const signupValidationSchema = yup.object().shape({
         .string()
         .min(3, ({ min }) => `Tên đăng nhập có ít nhất ${min} ký tự`)
         .required('Nhập tên đăng nhập !!')
-        .test("username_async_validation", "Tài khoản đã tồn tại",async function (value) { // Use function
-            const res = await GETAPI.postDataAPI("/user/checkUsername",{'username':value})
-            if(res.msg==="The Username already in use"){
-                return false
-            }else{
-                return true
-            }
-        })
     ,
 
     email: yup
         .string()
         .email("Vui lòng nhập đúng định dạng Email")
         .required('Nhập Email !!')
-        .test("email_async_validation", "Email đã tồn tại",async function (value) { // Use function
-            const res = await GETAPI.postDataAPI("/user/checkEmail",{'email':value})
-            if(res.msg==="The E-mail already in use"){
-                return false
-            }else{
-                return true
-            }
-        })
     ,   
     address: yup
     .string()
@@ -66,12 +50,11 @@ export default function SignUp ({navigation}){
     const [showModalSuccess, setshowModalSuccess] = useState(false);
     const formRef = useRef();
     const handleRegister = async(values)=>{
-        // const res = await GETAPI.postDataAPI("/user/register",values)
-        // if(res.success){
-        //     setshowModalSuccess(true)
 
-        // }
-        console.log('afd')
+        const res = await GETAPI.postDataAPI("user/register",values)
+        if(res.success){
+            setshowModalSuccess(true)
+        }
         
     }
     const ModalSuccess = ()=>(
@@ -90,10 +73,7 @@ export default function SignUp ({navigation}){
                             style={{ padding:10,backgroundColor:'blue',width:80,alignItems:'center',borderRadius:10 }}
                             onPress={()=>{
                                 console.log(formRef.current.values)
-                                navigation.replace("login",{
-                                    username: formRef.current.values.username,
-                                    password: formRef.current.values.password,
-                                })
+                                navigation.replace("Login")
                                 }
                             }
                         >
@@ -195,7 +175,7 @@ export default function SignUp ({navigation}){
                                 onChangeText={handleChange('phone')}
                                 onBlur={handleBlur('phone')}
                                 placeholderTextColor="gray"
-                                value={values.address}
+                                value={values.phone}
                             />
                         </View>
                         {(errors.phone && touched.phone)&&
@@ -206,7 +186,7 @@ export default function SignUp ({navigation}){
                             <Entypo name="user" size={20} color="white" style={styles.inputIcon}/>
                             <TextInput
                                 name="address"
-                                placeholder="Nhập địa chỉ"
+                                placeholder="Nhập Email"
                                 style={[errors.email&& touched.email?{...styles.textInput,borderColor: 'red'}
                                 :{...styles.textInput}]}
                                 onChangeText={handleChange('email')}

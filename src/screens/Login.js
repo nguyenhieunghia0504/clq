@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup'
 import bglogin from '../assets/bg-login.jpg'
 import Entypo from 'react-native-vector-icons/Entypo';
-
+import * as GETAPI from '../utils/fetchApi';
 const loginValidationSchema = yup.object().shape({
 username: yup
     .string()
@@ -22,6 +22,18 @@ export default function Login ({navigation,route}){
     const formRef = useRef();
     const handleLogin  = async(values,{ setErrors, resetForm })=>{
         console.log(values)
+        const res = await GETAPI.postDataAPI("user/login",values)
+        console.log(res)
+        if(res.msg){
+            if(res.msg==="Invalid account"){
+                setErrors({username:"Tài khoản không tồn tại"})
+            }else if(res.msg==="Incorrect password"){
+                setErrors({password:"Mật khẩu sai !!!"})
+            }else{
+                    navigation.navigate("Tab")
+                    await AsyncStorage.setItem("USERNAME",JSON.stringify(values))
+            }
+        }
        
     }
 
