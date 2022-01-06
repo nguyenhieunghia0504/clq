@@ -1,21 +1,25 @@
 import React from 'react';
 import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HouseImg from './src/assets/Pues1.svg';
 import TabNavigation from './src/Navigation/Tab';
-
+import Splash from './src/screens/splash';
+import Login from './src/screens/Login';
+import Singup from './src/screens/singup';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      initialRouteName="Main"
+      initialRouteName="Splash"
       >
+         <Stack.Screen component={Singup} name="Singup" options={{headerShown:false}} />
+        <Stack.Screen component={Login} name="Login" options={{headerShown:false}} />
+         <Stack.Screen component={Splash} name="Splash" options={{headerShown:false}} />
         <Stack.Screen component={Main} name="Main" options={{headerShown:false}} />
         <Stack.Screen component={TabNavigation} name="Tab" options={{headerShown:false}} />
         {/* <Stack.Screen component={HomeScreen} name="Home"options={{headerShown:false}}/> */}
