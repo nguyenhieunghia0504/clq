@@ -13,7 +13,10 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+      initialRouteName="Main"
+      >
+        <Stack.Screen component={Main} name="Main" options={{headerShown:false}} />
         <Stack.Screen component={TabNavigation} name="Tab" options={{headerShown:false}} />
         {/* <Stack.Screen component={HomeScreen} name="Home"options={{headerShown:false}}/> */}
       </Stack.Navigator>
@@ -34,7 +37,7 @@ const Main = ({navigation}) => {
       
     </View>
     <HouseImg width={300} height={300}/>
-    <TouchableOpacity onPress={() => navigation.navigate('Home')}
+    <TouchableOpacity onPress={() => navigation.navigate('Tab')}
     style={{
       backgroundColor:'#AD40AF', 
       padding:20, width:'90%', 
