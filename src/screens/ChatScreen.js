@@ -1,22 +1,14 @@
 import React,{useEffect,useState} from "react";
 import {View, Text, Button, StyleSheet} from 'react-native';
-import {link} from '../utils/linkApi'
+import * as FetchAPI from '../utils/fetchApi'
 export default  function ChatScreen ({navigation}){
     const [dataTest,setDataTest] = useState()
     useEffect(()=>{
         getData()
     },[])
-    const getData = ()=>{
-        console.log(link)
-        fetch(link+"api1/test1")
-        .then(response=>response.json())
-        .then(responseJson=>{
-            console.log(responseJson)
-            setDataTest(responseJson)
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+    const getData = async()=>{
+        const res = await FetchAPI.getAPI("api1/test1");
+        setDataTest(res)
     }
     return (
         <View>

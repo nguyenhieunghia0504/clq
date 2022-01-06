@@ -30,8 +30,8 @@ export default function Login ({navigation,route}){
             }else if(res.msg==="Incorrect password"){
                 setErrors({password:"Mật khẩu sai !!!"})
             }else{
-                    navigation.navigate("Tab")
-                    await AsyncStorage.setItem("USERNAME",JSON.stringify(values))
+                navigation.navigate("Tab")
+                await AsyncStorage.setItem("USERNAME",JSON.stringify(values))
             }
         }
        

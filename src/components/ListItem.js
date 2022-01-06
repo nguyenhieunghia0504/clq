@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {getPriceVND} from '../model/getPriceVND'
 
-
-export default function ListItem ({photo, title, subTitle, isFree, price}) {
+export default function ListItem ({id,photo, title, subTitle, isFree, price,navigation}) {
     return (
         <View style={{
             flexDirection:'row',
@@ -11,7 +11,7 @@ export default function ListItem ({photo, title, subTitle, isFree, price}) {
             marginBottom: 20,
         }}>
             <View style={{flexDirection:'row', align:'center', flex:1}}>
-                <Image source={photo} style={{width:55,height:55,borderRadius:10,marginRight:8}}
+                <Image source={{ uri:photo }} style={{width:55,height:55,borderRadius:10,marginRight:8}}
 
                 />
                 <View>
@@ -31,14 +31,16 @@ export default function ListItem ({photo, title, subTitle, isFree, price}) {
                 backgroundColor:'#0aada8', 
                 padding:10, 
                 width:100, 
-                borderRadius:10}}>
+                borderRadius:10}}
+                onPress={() =>navigation.navigate('details_land',{ID_LAND:id})}
+            >
                 <Text style={{
                     color:'#fff', 
                     textAlign:'center', 
                     fontFamily:'Roboto-Medium', 
                     fontSize:14}}>
-                    {isFree == 'Yes' && 'Details'}
-                    {isFree == 'No' && price }
+                    {isFree == 0 && 'Details'}
+                    {isFree == 1 && getPriceVND(price)+" vnđ" }
                 </Text>
             </TouchableOpacity>
         </View>

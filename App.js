@@ -9,6 +9,7 @@ import TabNavigation from './src/Navigation/Tab';
 import Splash from './src/screens/splash';
 import Login from './src/screens/Login';
 import Singup from './src/screens/singup';
+import DetailsLand from './src/screens/DetailsLand';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
          <Stack.Screen component={Splash} name="Splash" options={{headerShown:false}} />
         <Stack.Screen component={Main} name="Main" options={{headerShown:false}} />
         <Stack.Screen component={TabNavigation} name="Tab" options={{headerShown:false}} />
+        <Stack.Screen component={DetailsLand} name="details_land" options={{title: 'Chi tiết'}} />
         {/* <Stack.Screen component={HomeScreen} name="Home"options={{headerShown:false}}/> */}
       </Stack.Navigator>
     </NavigationContainer>

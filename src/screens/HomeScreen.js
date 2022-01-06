@@ -1,19 +1,35 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {View, Text, SafeAreaView, ScrollView, ImageBackground, TextInput, TouchableOpacity,Dimensions  } from 'react-native';
 import Feather from  'react-native-vector-icons/Feather';
 import Carousel from 'react-native-snap-carousel';
 import BannerSlider from '../components/BannerSlider';
-import {Projectland, apartment, sliderData} from '../model/data';
+import { sliderData} from '../model/data';
 import CustomSwitch from '../components/CustomSwitch';
 import { useState } from 'react';
 import ListItem from '../components/ListItem';
+import * as FetchAPI from '../utils/fetchApi';
 
-
-export default function HomeScreen () {
+export default function HomeScreen ({navigation}) {
     const [landTab,setLandTab] = useState(1);
-
-
-
+    const [apartment, setapartment] = useState([]);
+    const [Projectland, setProjectland] = useState([]);
+    useEffect(()=>{
+        getData()
+    },[])
+    const getData = async()=>{
+        let project = [];
+        let apartment = [];
+        const res = await FetchAPI.getAPI("land/getFullLand")
+        res.map(item=>{
+            if(item.Type==="Project Land"){
+                project.push(item)
+            }else{
+                apartment.push(item)
+            }
+        })
+        setapartment(apartment)
+        setProjectland(project)
+    }
     const renderBanner =({item,index}) => {
         return <BannerSlider data={item}/>
     };
@@ -69,7 +85,7 @@ export default function HomeScreen () {
                 </View>  
 
                 <Carousel
-                    ref={(c) => { this._carousel = c; }}
+                    // ref={(c) => { this._carousel = c; }}
                     data={sliderData}
                     renderItem={renderBanner}
                     sliderWidth={Dimensions.get('window').width - 40}
@@ -90,23 +106,28 @@ export default function HomeScreen () {
                 {landTab == 1 &&
                     apartment.map(item => (
                         <ListItem 
-                        key={item.id} 
-                        photo={item.poster} 
-                        title={item.title} 
-                        subTitle={item.subtitle} 
-                        isFree={item.isFree}
+                        key={item.ID} 
+                        photo={item.Image} 
+                        title={item.Title} 
+                        subTitle={item.SubTitle} 
+                        isFree={item.IsFree}
+                        price={item.Price} 
+                        navigation={navigation}
+                        id = {item.ID}
                         />
                     ))
                 }
                 {landTab == 2 && 
                     Projectland.map(item => (
                         <ListItem 
-                        key={item.id} 
-                        photo={item.poster} 
-                        title={item.title} 
-                        subTitle={item.subtitle} 
-                        isFree={item.isFree}
-                        price={item.price} 
+                        key={item.ID} 
+                        photo={item.Image} 
+                        title={item.Title} 
+                        subTitle={item.SubTitle} 
+                        isFree={item.IsFree}
+                        price={item.Price} 
+                        navigation={navigation}
+                        id = {item.ID}
                         />
                     ))
                 }
