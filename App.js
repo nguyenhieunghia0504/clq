@@ -9,7 +9,8 @@ import Splash from './src/screens/splash';
 import Login from './src/screens/Login';
 import Singup from './src/screens/singup';
 import DetailsLand from './src/screens/DetailsLand';
-import ViewSchedule from './src/screens/ViewSchedule'
+import ViewSchedule from './src/screens/ViewSchedule';
+import Search from './src/screens/Search'
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       <Stack.Navigator
       initialRouteName="Splash"
       >
+        <Stack.Screen component={Search} name="Search" options={{title: 'Search'}}/>
          <Stack.Screen component={Singup} name="Singup" options={{headerShown:false}} />
         <Stack.Screen component={Login} name="Login" options={{headerShown:false}} />
          <Stack.Screen component={Splash} name="Splash" options={{headerShown:false}} />

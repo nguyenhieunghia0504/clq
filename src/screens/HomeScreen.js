@@ -57,17 +57,24 @@ export default function HomeScreen ({navigation}) {
                 </View>
 
                 <View style={{
-                    flexDirection:'row', 
-                    boderColor:'#C6C6C6', 
+                    flexDirection:'row',
+                    alignContent:'center',
                     borderWidth:1, 
-                    borderRadius:8, 
+                    borderColor: 'purple',
+                    borderRadius:7, 
                     paddingHorizontal:10, 
-                    paddingVertical:8,}}>
+                    paddingVertical:5,
+                    height: 50}}>
+                <TouchableOpacity onPress={()=>{
+                    navigation.navigate('Search')
+                }}>
+                          
                 <Feather 
                 name="search" 
-                size={30} 
+                size={22} 
                 color="#C6C6C6" 
-                style={{marginRight:5}}/>
+                style={{marginRight:5, marginTop: 8}}/>
+                </TouchableOpacity> 
                 <TextInput placeholder="Search"/>
                 </View>
 
