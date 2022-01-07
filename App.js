@@ -2,7 +2,6 @@ import React from 'react';
 import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './src/screens/HomeScreen';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HouseImg from './src/assets/Pues1.svg';
 import TabNavigation from './src/Navigation/Tab';
@@ -10,6 +9,7 @@ import Splash from './src/screens/splash';
 import Login from './src/screens/Login';
 import Singup from './src/screens/singup';
 import DetailsLand from './src/screens/DetailsLand';
+import ViewSchedule from './src/screens/ViewSchedule'
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -24,6 +24,7 @@ const App = () => {
         <Stack.Screen component={Main} name="Main" options={{headerShown:false}} />
         <Stack.Screen component={TabNavigation} name="Tab" options={{headerShown:false}} />
         <Stack.Screen component={DetailsLand} name="details_land" options={{title: 'Chi tiết'}} />
+        <Stack.Screen component={ViewSchedule} name="view_schedule" options={{title: 'Lịch xem bất động sản'}} />
         {/* <Stack.Screen component={HomeScreen} name="Home"options={{headerShown:false}}/> */}
       </Stack.Navigator>
     </NavigationContainer>
