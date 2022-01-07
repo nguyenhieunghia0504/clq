@@ -14,7 +14,7 @@ export default function ListItem ({id,photo, title, subTitle, isFree, price,navi
                 <Image source={{ uri:photo }} style={{width:55,height:55,borderRadius:10,marginRight:8}}
 
                 />
-                <View>
+                <View style={{maxWidth:"70%" }}>
                     <Text style={{
                         color:'#333', 
                         fontFamily:'Roboto-Medium', 

@@ -24,16 +24,24 @@ export default function DetailsHome ({navigation,route}){
     return(
         <View style={styles.container}>
             {showContent &&
-                <View>
-                    <Item title="Mã căn" content={`# ${data.ID}`} styleContent={{fontWeight:'bold'}}/>
-                    <Item title="Giá" content={getPriceVND(data.Price)+" vnđ"} styleContent={{fontWeight:'bold'}} />
-                    <Item title="Dự án" content={data.Project} styleContent={{color:'blue'}}/>
-                    <Item title="Loại hình" content={data.Paradigm} styleContent={{fontWeight:'bold'}}/>
-                    <Item title="Hướng" content={data.Direction}/>
-                    <Item title="Tầng" content={data.Floor}/>
-                    <Item title="Diện tích" content={data.Area +" m2"}/>
-                    <Item title="Phòng ngủ" content={data.BedRoom}/>
-                    <Item title="Phòng tắm" content={data.BathRoom}/>
+                <View style={{ flex:1 }}>
+                    {data!==undefined ?
+                    <>
+                        <Item title="Mã căn" content={`# ${data.ID}`} styleContent={{fontWeight:'bold'}}/>
+                        <Item title="Giá" content={getPriceVND(data.Price)+" vnđ"} styleContent={{fontWeight:'bold'}} />
+                        <Item title="Dự án" content={data.Project} styleContent={{color:'blue'}}/>
+                        <Item title="Loại hình" content={data.Paradigm} styleContent={{fontWeight:'bold'}}/>
+                        <Item title="Hướng" content={data.Direction}/>
+                        <Item title="Tầng" content={data.Floor}/>
+                        <Item title="Diện tích" content={data.Area +" m2"}/>
+                        <Item title="Phòng ngủ" content={data.BedRoom}/>
+                        <Item title="Phòng tắm" content={data.BathRoom}/>
+                    </>
+                    :
+                    <View style={{ flex:1,justifyContent: 'center', alignItems: 'center'}}>
+                        <Text>Bất động sản chưa có thông tin chi tiết...</Text>
+                    </View>
+                    }
                 </View>
             }
         </View>

@@ -169,9 +169,11 @@ export default  function DetailsLand({navigation,route}){
                     <Image style={ styles.imageDetails } source={{uri:data.Image}} />
                     <View style={styles.content}>
                         <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+                            <View style={{ maxWidth:"90%" }}> 
                             <Text style={{fontSize:16,...styles.title}}>
                                 {`${data.SubTitle} - ${data.Title}`}
                             </Text>
+                            </View>
                             <TouchableOpacity 
                                 onPress={()=>handleFavorite()}
                             >
