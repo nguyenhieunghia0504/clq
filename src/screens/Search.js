@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import { View, Text, TouchableOpacity, Dimensions, StyleSheet,TextInput, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Dimensions, StyleSheet,TextInput, ScrollView, Image } from 'react-native'
 import Feather from  'react-native-vector-icons/Feather';
 import * as FetchAPI from '../utils/fetchApi';
-export default function Search() {
+export default function Search({navigation}) {
     const [valueSearch, setvalueSearch] = useState('');
     const [DataSearch, setDataSearch] = useState([]);
 
@@ -23,14 +23,28 @@ export default function Search() {
 
     const RenderItem = (item)=>{
         return(
-            <View key={item.ID}>
-                <Text>{item.Address}</Text>
-            </View>
+            <TouchableOpacity onPress={() =>navigation.navigate('details_land',{ID_LAND:item.ID})
+            } key={item.ID} style= {styles.wrapcontent}>
+             <Image 
+            source={{ uri:item.Image}} 
+            resizeMode='contain'
+            style={{ 
+                width : windowW*0.40,
+                height : windowH*0.18,
+                borderRadius:15,
+            }}
+        />           
+        <Text style={{...styles.text, color:'red', fontWeight:'bold'}}>{item.SubTitle}</Text>
+        <Text style={{...styles.text, color:'black'}}>{item.Address}</Text>
+            </TouchableOpacity>
         )
     }
 
     return (
         <View style = {styles.container}>
+            <View style={styles.header}>
+                <Text style={{ color: 'black',fontWeight:'bold' }}>Search</Text>
+            </View>
             <View style= {styles.search}>
             <TouchableOpacity  onPress={()=>{
                 handleSearch(valueSearch);
@@ -46,7 +60,7 @@ export default function Search() {
                 onChangeText={(value)=>setvalueSearch(value)}/>
             </View>
             
-            <ScrollView  contentContainerStyle={styles.contenItem} >
+            <ScrollView contentContainerStyle={styles.contenItem} >
                 {DataSearch.length > 0 &&
                 DataSearch.map(e=>{
                     return(
@@ -60,20 +74,21 @@ export default function Search() {
     )
 }
 const windowW = Dimensions.get('window').width;
-
+const windowH = Dimensions.get('window').height;
 const styles = StyleSheet.create({
     container:{
-        flex: 1,
+        flex:1,
         backgroundColor: 'white',
     },
     contenItem:{
-        flex:1,
         marginTop:15,
         marginHorizontal: 10,
         justifyContent:"space-between",
         flexDirection:"row",
         backgroundColor: 'white',
         flexWrap:'wrap',
+        paddingBottom:20,
+
     },
     search:{
         flexDirection:'row',
@@ -94,5 +109,40 @@ const styles = StyleSheet.create({
         elevation: 3,
         backgroundColor:'white'
         
-    }
+    },
+    wrapcontent:{
+        flexDirection:'column',
+        justifyContent:'flex-start',
+        alignContent:'center',
+        alignItems:'center',
+        width: windowW*0.45,
+        marginLeft: 5,
+        marginBottom: 10,
+        height: windowH*0.35,
+        backgroundColor: "#F8F9F9",
+        borderRadius: 5,
+        shadowColor:'#000',
+        shadowOffset:{
+            width:0,
+            height: 2,
+        },
+        shadowOpacity : 0.35,
+        shadowRadius: 3.4,
+        elevation:5,
+        
+    },
+    text:{
+        fontSize:14,
+        maxWidth:windowW*0.40,
+        alignItems:'center',
+        textAlign:'center'
+        
+    }, header:{
+        height: 40,
+        justifyContent:'center',
+        elevation:5,
+        backgroundColor:'#F1F3F4',
+        paddingLeft:10
+
+    },
 })

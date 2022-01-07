@@ -8,6 +8,8 @@ export default  function AccountScreen ({navigation}){
     const [showContent, setshowContent] = useState(false);
     const [visibleModalLogout, setvisibleModalLogout] = useState(false);
     const [dataUser, setdataUser] = useState([]);
+    const [showInfor, setshowInfor] = useState(false);
+    const [Datainfor, setDatainfor] = useState([]);
     useEffect(()=>{
         navigation.addListener('focus',()=>{
             setshowContent(false)
@@ -19,6 +21,7 @@ export default  function AccountScreen ({navigation}){
         if(getData===null){
             setstatusUser(false)
         }else{
+            setDatainfor(JSON.parse(getData));
             setdataUser(JSON.parse(getData))
             setstatusUser(true)
         }
@@ -73,10 +76,38 @@ export default  function AccountScreen ({navigation}){
                         <FontAwesome name="history" size={24} color="black" /> 
                         <Text style={styles.text_bar}>Lịch sử đặt lịch</Text> 
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.bar}>
+                    <TouchableOpacity style={styles.bar} onPress={()=>{
+                        // console.log(showInfor)
+                            setshowInfor(!showInfor)
+ 
+                    }}>
+                    
+                       
                         <FontAwesome name="user" size={24} color="black"/> 
                         <Text style={styles.text_bar}>Quản lý thông tin cá nhân</Text>
                     </TouchableOpacity>
+
+                    {showInfor? 
+                        <View style={{ flexDirection:'column', marginLeft:10, marginTop:10 }}>
+                            <View style={{ flexDirection:'row', justifyContent:'flex-start', marginBottom:5}}>
+                                <Text style={styles.TextName}>Họ Tên : </Text>
+                                <Text >{Datainfor.Name} </Text>
+                            </View>
+                            <View style={{ flexDirection:'row', justifyContent:'flex-start', marginBottom:5 }}>
+                                <Text style={styles.TextName}> Địa chỉ: </Text>
+                                <Text>{Datainfor.Address} </Text>
+                            </View>
+                            <View style={{ flexDirection:'row', justifyContent:'flex-start', marginBottom:5 }}>
+                                <Text style={styles.TextName}> SĐT : </Text>
+                                <Text>{Datainfor.Phone} </Text>
+                            </View>
+                            <View style={{ flexDirection:'row', justifyContent:'flex-start', marginBottom:5 }}>
+                                <Text style={styles.TextName}> Email : </Text>
+                                <Text>{Datainfor.Email} </Text>
+                            </View>
+                        </View>:null
+                    }
+
                     <TouchableOpacity style={styles.bar} onPress={()=>setvisibleModalLogout(true)}>
                         <Feather name="log-out" size={24} color="black"/> 
                         <Text style={styles.text_bar}>Đăng xuất</Text>
@@ -163,5 +194,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius:10,
         elevation:8
-    }
+    },
+    TextName: {
+        color:'black',
+        fontWeight:"bold"
+    },
+
 });

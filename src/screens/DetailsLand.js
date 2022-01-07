@@ -5,7 +5,7 @@ import {getPriceVND} from '../model/getPriceVND'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
-export default  function DetailsLand({route}){
+export default  function DetailsLand({navigation,route}){
     const [data, setdata] = useState();
     const [showContent, setshowContent] = useState(false);
     const [statusFavorite, setstatusFavorite] = useState(false);
@@ -169,9 +169,11 @@ export default  function DetailsLand({route}){
                     <Image style={ styles.imageDetails } source={{uri:data.Image}} />
                     <View style={styles.content}>
                         <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+                            <View style={{ maxWidth:"90%" }}> 
                             <Text style={{fontSize:16,...styles.title}}>
                                 {`${data.SubTitle} - ${data.Title}`}
                             </Text>
+                            </View>
                             <TouchableOpacity 
                                 onPress={()=>handleFavorite()}
                             >
@@ -189,6 +191,12 @@ export default  function DetailsLand({route}){
                             <Text style={styles.title}>Mô tả : </Text>
                             {`Mô tả: ${data.Description}`} 
                         </Text>
+                        <TouchableOpacity
+                            style={styles.btnDetails}
+                            onPress={()=>navigation.navigate("details_home",{ID_LAND:data.ID})}
+                        >
+                            <Text>Chi tiết</Text>
+                        </TouchableOpacity>
                         <View style={{ width:'100%',alignItems:'center' }}>
                         <View style={styles.hotline}>
                             <Text style={{ color:'tomato',fontSize:14,fontWeight:'bold' }}>Hotline : 0929303655</Text>
@@ -292,5 +300,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius:10,
         elevation:8
+    },
+    btnDetails:{
+        padding:10,
+        borderColor:'tomato',
+        borderWidth:.8,
+        width:80,
+        marginTop:10,
+        justifyContent:'center',
+        alignItems: 'center',
+        borderRadius:10
     }
 })

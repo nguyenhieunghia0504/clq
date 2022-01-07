@@ -11,6 +11,7 @@ import Singup from './src/screens/singup';
 import DetailsLand from './src/screens/DetailsLand';
 import ViewSchedule from './src/screens/ViewSchedule';
 import Search from './src/screens/Search'
+import DetailsHome from './src/screens/DetailsHome'
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -19,14 +20,15 @@ const App = () => {
       <Stack.Navigator
       initialRouteName="Splash"
       >
-        <Stack.Screen component={Search} name="Search" options={{title: 'Search'}}/>
-         <Stack.Screen component={Singup} name="Singup" options={{headerShown:false}} />
+        <Stack.Screen component={Search} name="Search" options={{headerShown:false}}/>    
+        <Stack.Screen component={Singup} name="Singup" options={{headerShown:false}} />
         <Stack.Screen component={Login} name="Login" options={{headerShown:false}} />
-         <Stack.Screen component={Splash} name="Splash" options={{headerShown:false}} />
+        <Stack.Screen component={Splash} name="Splash" options={{headerShown:false}} />
         <Stack.Screen component={Main} name="Main" options={{headerShown:false}} />
         <Stack.Screen component={TabNavigation} name="Tab" options={{headerShown:false}} />
         <Stack.Screen component={DetailsLand} name="details_land" options={{title: 'Chi tiết'}} />
         <Stack.Screen component={ViewSchedule} name="view_schedule" options={{title: 'Lịch xem bất động sản'}} />
+        <Stack.Screen component={DetailsHome} name="details_home" options={{title: 'Chi tiết'}} />
         {/* <Stack.Screen component={HomeScreen} name="Home"options={{headerShown:false}}/> */}
       </Stack.Navigator>
     </NavigationContainer>
@@ -65,13 +67,7 @@ const Main = ({navigation}) => {
   );
 };
 
-//const Home = () => {
-  //return (
-    //<View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-     // <Text>Home Screen</Text>
-   // </View>
- // );
-//}
+
 
 
 export default App;

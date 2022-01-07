@@ -42,7 +42,10 @@ export default function HomeScreen ({navigation}) {
 
     return (
         <SafeAreaView style={{flex:1, backgroundColor:'#fff'}}>
-            <ScrollView style={{padding: 20}}>
+            <ScrollView 
+                style={{padding: 20}}
+                contentContainerStyle={{ paddingBottom:20}}
+            >
                 <View style={{
                 flexDirection:'row', 
                 justifyContent:'space-between', 
@@ -113,14 +116,14 @@ export default function HomeScreen ({navigation}) {
                 {landTab == 1 &&
                     apartment.map(item => (
                         <ListItem 
-                        key={item.ID} 
-                        photo={item.Image} 
-                        title={item.Title} 
-                        subTitle={item.SubTitle} 
-                        isFree={item.IsFree}
-                        price={item.Price} 
-                        navigation={navigation}
-                        id = {item.ID}
+                            key={item.ID} 
+                            photo={item.Image} 
+                            title={item.Title} 
+                            subTitle={item.SubTitle} 
+                            isFree={item.IsFree}
+                            price={item.Price} 
+                            navigation={navigation}
+                            id = {item.ID}
                         />
                     ))
                 }
